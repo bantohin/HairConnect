@@ -9,6 +9,7 @@
     using Data;
     using Data.Models;
     using Infrastructure.Extensions;
+    using Microsoft.AspNetCore.Mvc;
 
     public class Startup
     {
@@ -36,8 +37,16 @@
                 .AddDefaultTokenProviders();
 
             // Add application services.
+            services.AddAuthentication().AddFacebook(facebookOptions =>
+            {
+                facebookOptions.AppId = Configuration["Authentication:Facebook:AppId"];
+                facebookOptions.AppSecret = Configuration["Authentication:Facebook:AppSecret"];
+            });
 
-            services.AddMvc();
+            services.AddMvc(options => 
+            {
+                options.Filters.Add(new AutoValidateAntiforgeryTokenAttribute());
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -17,8 +17,7 @@
         [Display(Name = "Last Name")]
         public string LastName { get; set; }
 
-        [Required]
-        [Display(Name = "Phone Number")]
+        [Display(Name = "Phone Number (not required)")]
         public string PhoneNumber { get; set; }
 
         [Required]

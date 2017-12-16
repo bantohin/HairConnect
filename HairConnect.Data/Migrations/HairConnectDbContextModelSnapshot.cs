@@ -20,6 +20,84 @@ namespace HairConnect.Data.Migrations
                 .HasAnnotation("ProductVersion", "2.0.1-rtm-125")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+            modelBuilder.Entity("HairConnect.Data.Models.Conversation", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("ReceiverId");
+
+                    b.Property<string>("SenderId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ReceiverId");
+
+                    b.HasIndex("SenderId");
+
+                    b.ToTable("Conversations");
+                });
+
+            modelBuilder.Entity("HairConnect.Data.Models.Message", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Content")
+                        .IsRequired()
+                        .HasMaxLength(300);
+
+                    b.Property<int>("ConversationId");
+
+                    b.Property<string>("SenderId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ConversationId");
+
+                    b.HasIndex("SenderId");
+
+                    b.ToTable("Messages");
+                });
+
+            modelBuilder.Entity("HairConnect.Data.Models.Picture", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<byte[]>("Content");
+
+                    b.Property<string>("UserId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Pictures");
+                });
+
+            modelBuilder.Entity("HairConnect.Data.Models.Report", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Content")
+                        .IsRequired()
+                        .HasMaxLength(300);
+
+                    b.Property<string>("ReportedUserId");
+
+                    b.Property<string>("SenderId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ReportedUserId");
+
+                    b.HasIndex("SenderId");
+
+                    b.ToTable("Reports");
+                });
+
             modelBuilder.Entity("HairConnect.Data.Models.User", b =>
                 {
                     b.Property<string>("Id")
@@ -35,9 +113,13 @@ namespace HairConnect.Data.Migrations
 
                     b.Property<bool>("EmailConfirmed");
 
-                    b.Property<string>("FirstName");
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasMaxLength(50);
 
-                    b.Property<string>("LastName");
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasMaxLength(50);
 
                     b.Property<bool>("LockoutEnabled");
 
@@ -54,6 +136,8 @@ namespace HairConnect.Data.Migrations
                     b.Property<string>("PhoneNumber");
 
                     b.Property<bool>("PhoneNumberConfirmed");
+
+                    b.Property<byte[]>("ProfilePicture");
 
                     b.Property<string>("SecurityStamp");
 
@@ -181,6 +265,47 @@ namespace HairConnect.Data.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens");
+                });
+
+            modelBuilder.Entity("HairConnect.Data.Models.Conversation", b =>
+                {
+                    b.HasOne("HairConnect.Data.Models.User", "Receiver")
+                        .WithMany("ConversationsReceived")
+                        .HasForeignKey("ReceiverId");
+
+                    b.HasOne("HairConnect.Data.Models.User", "Sender")
+                        .WithMany("ConversationsSent")
+                        .HasForeignKey("SenderId");
+                });
+
+            modelBuilder.Entity("HairConnect.Data.Models.Message", b =>
+                {
+                    b.HasOne("HairConnect.Data.Models.Conversation", "Conversation")
+                        .WithMany("Messages")
+                        .HasForeignKey("ConversationId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("HairConnect.Data.Models.User", "Sender")
+                        .WithMany("Messages")
+                        .HasForeignKey("SenderId");
+                });
+
+            modelBuilder.Entity("HairConnect.Data.Models.Picture", b =>
+                {
+                    b.HasOne("HairConnect.Data.Models.User", "User")
+                        .WithMany("Pictures")
+                        .HasForeignKey("UserId");
+                });
+
+            modelBuilder.Entity("HairConnect.Data.Models.Report", b =>
+                {
+                    b.HasOne("HairConnect.Data.Models.User", "ReportedUser")
+                        .WithMany("ReceivedReports")
+                        .HasForeignKey("ReportedUserId");
+
+                    b.HasOne("HairConnect.Data.Models.User", "Sender")
+                        .WithMany("FiledReports")
+                        .HasForeignKey("SenderId");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

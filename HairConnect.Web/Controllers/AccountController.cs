@@ -22,7 +22,7 @@
         public AccountController(
             UserManager<User> userManager,
             SignInManager<User> signInManager,
-            ILogger<AccountController> logger)
+        ILogger<AccountController> logger)
         {
             _userManager = userManager;
             _signInManager = signInManager;
@@ -223,6 +223,11 @@
                 var result = await _userManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
+                    if (model.IsHairdresser)
+                    {
+                        user = await _userManager.FindByEmailAsync(model.Email);
+                        await this._userManager.AddToRoleAsync(user, WebConstants.HairdresserRole);
+                    }
                     _logger.LogInformation("User created a new account with password.");
 
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);

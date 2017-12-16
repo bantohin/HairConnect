@@ -3,9 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27130.2003
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HairConnect.Web", "HairConnect.Web\HairConnect.Web.csproj", "{11DC1EAE-8BBA-4900-9699-4C5B7B269A7C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HairConnect.Web", "HairConnect.Web\HairConnect.Web.csproj", "{11DC1EAE-8BBA-4900-9699-4C5B7B269A7C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HairConnect.Data", "HairConnect.Data\HairConnect.Data.csproj", "{16480B19-EB73-4734-AC80-5BF84DFA0FB6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HairConnect.Data", "HairConnect.Data\HairConnect.Data.csproj", "{16480B19-EB73-4734-AC80-5BF84DFA0FB6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HairConnect.Services", "HairConnect.Services\HairConnect.Services.csproj", "{ED37256E-7BFD-4147-AA70-419F01C8ADC7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HairConnect.Common", "HairConnect.Common\HairConnect.Common.csproj", "{6D719425-13F8-40DC-9247-F601FBAFDCE2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +25,14 @@ Global
 		{16480B19-EB73-4734-AC80-5BF84DFA0FB6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{16480B19-EB73-4734-AC80-5BF84DFA0FB6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{16480B19-EB73-4734-AC80-5BF84DFA0FB6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ED37256E-7BFD-4147-AA70-419F01C8ADC7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ED37256E-7BFD-4147-AA70-419F01C8ADC7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ED37256E-7BFD-4147-AA70-419F01C8ADC7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ED37256E-7BFD-4147-AA70-419F01C8ADC7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6D719425-13F8-40DC-9247-F601FBAFDCE2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6D719425-13F8-40DC-9247-F601FBAFDCE2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6D719425-13F8-40DC-9247-F601FBAFDCE2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6D719425-13F8-40DC-9247-F601FBAFDCE2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

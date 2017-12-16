@@ -51,7 +51,7 @@
                             admin = new User()
                             {
                                 FirstName = adminName,
-                                UserName = adminName,
+                                UserName = adminEmail,
                                 LastName = adminName,
                                 Email = adminEmail,
                                 PhoneNumber = adminName,

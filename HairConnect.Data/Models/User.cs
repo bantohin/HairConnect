@@ -16,6 +16,8 @@
         
         public byte[] ProfilePicture { get; set; }
 
+        public int Rating { get; set; }
+
         public List<Picture> Pictures { get; set; } = new List<Picture>();
 
         public List<Conversation> ConversationsSent { get; set; } = new List<Conversation>();

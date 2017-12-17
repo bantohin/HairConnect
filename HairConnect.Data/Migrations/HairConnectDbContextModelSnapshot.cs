@@ -139,6 +139,8 @@ namespace HairConnect.Data.Migrations
 
                     b.Property<byte[]>("ProfilePicture");
 
+                    b.Property<int>("Rating");
+
                     b.Property<string>("SecurityStamp");
 
                     b.Property<bool>("TwoFactorEnabled");

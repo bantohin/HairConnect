@@ -1,0 +1,13 @@
+C:\Users\dimit\OneDrive\Documents\Visual Studio 2017\Projects\C# Web Module 2017\ASP.NET Core\HairConnectGit\HairConnect.Services\bin\Debug\netstandard2.0\HairConnect.Services.deps.json
+C:\Users\dimit\OneDrive\Documents\Visual Studio 2017\Projects\C# Web Module 2017\ASP.NET Core\HairConnectGit\HairConnect.Services\bin\Debug\netstandard2.0\HairConnect.Services.dll
+C:\Users\dimit\OneDrive\Documents\Visual Studio 2017\Projects\C# Web Module 2017\ASP.NET Core\HairConnectGit\HairConnect.Services\bin\Debug\netstandard2.0\HairConnect.Services.pdb
+C:\Users\dimit\OneDrive\Documents\Visual Studio 2017\Projects\C# Web Module 2017\ASP.NET Core\HairConnectGit\HairConnect.Services\obj\Debug\netstandard2.0\HairConnect.Services.csprojResolveAssemblyReference.cache
+C:\Users\dimit\OneDrive\Documents\Visual Studio 2017\Projects\C# Web Module 2017\ASP.NET Core\HairConnectGit\HairConnect.Services\obj\Debug\netstandard2.0\HairConnect.Services.csproj.CoreCompileInputs.cache
+C:\Users\dimit\OneDrive\Documents\Visual Studio 2017\Projects\C# Web Module 2017\ASP.NET Core\HairConnectGit\HairConnect.Services\obj\Debug\netstandard2.0\HairConnect.Services.AssemblyInfoInputs.cache
+C:\Users\dimit\OneDrive\Documents\Visual Studio 2017\Projects\C# Web Module 2017\ASP.NET Core\HairConnectGit\HairConnect.Services\obj\Debug\netstandard2.0\HairConnect.Services.AssemblyInfo.cs
+C:\Users\dimit\OneDrive\Documents\Visual Studio 2017\Projects\C# Web Module 2017\ASP.NET Core\HairConnectGit\HairConnect.Services\obj\Debug\netstandard2.0\HairConnect.Services.dll
+C:\Users\dimit\OneDrive\Documents\Visual Studio 2017\Projects\C# Web Module 2017\ASP.NET Core\HairConnectGit\HairConnect.Services\obj\Debug\netstandard2.0\HairConnect.Services.pdb
+C:\Users\dimit\OneDrive\Documents\Visual Studio 2017\Projects\C# Web Module 2017\ASP.NET Core\HairConnectGit\HairConnect.Services\bin\Debug\netstandard2.0\HairConnect.Common.dll
+C:\Users\dimit\OneDrive\Documents\Visual Studio 2017\Projects\C# Web Module 2017\ASP.NET Core\HairConnectGit\HairConnect.Services\bin\Debug\netstandard2.0\HairConnect.Data.dll
+C:\Users\dimit\OneDrive\Documents\Visual Studio 2017\Projects\C# Web Module 2017\ASP.NET Core\HairConnectGit\HairConnect.Services\bin\Debug\netstandard2.0\HairConnect.Common.pdb
+C:\Users\dimit\OneDrive\Documents\Visual Studio 2017\Projects\C# Web Module 2017\ASP.NET Core\HairConnectGit\HairConnect.Services\bin\Debug\netstandard2.0\HairConnect.Data.pdb

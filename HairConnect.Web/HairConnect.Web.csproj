@@ -25,4 +25,8 @@
     <ProjectReference Include="..\HairConnect.Services\HairConnect.Services.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Models\Pictures\" />
+  </ItemGroup>
+
 </Project>

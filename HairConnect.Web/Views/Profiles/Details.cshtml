@@ -1,0 +1,23 @@
+﻿@model UserDetailsModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<div class="text-center">
+    <div>
+        <img class="img-thumbnail img-responsive img-height" src="@Url.Action("GetProfilePicture", "Profiles", new { pictureContent = Model.ProfilePicture})" />
+    </div>
+    <h3>@Model.FirstName @Model.LastName</h3>
+    <br />
+    <h4>@Model.Rating</h4>
+    <br />
+    <ul class="list-group">
+        @foreach (Picture picture in Model.Pictures)
+        {
+            <li class="list-group-item">
+                <img class="img-thumbnail img-responsive img-height" src="@Url.Action("GetProfilePicture", "Profiles", new { pictureContent = picture})" />
+            </li>
+        }
+    </ul>
+</div>

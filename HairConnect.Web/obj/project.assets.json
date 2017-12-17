@@ -5103,6 +5103,10 @@
       "HairConnect.Services/1.0.0": {
         "type": "project",
         "framework": ".NETStandard,Version=v2.0",
+        "dependencies": {
+          "HairConnect.Common": "1.0.0",
+          "HairConnect.Data": "1.0.0"
+        },
         "compile": {
           "bin/placeholder/HairConnect.Services.dll": {}
         },

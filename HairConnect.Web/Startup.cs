@@ -10,6 +10,7 @@
     using Data.Models;
     using Infrastructure.Extensions;
     using Microsoft.AspNetCore.Mvc;
+    using AutoMapper;
 
     public class Startup
     {
@@ -37,6 +38,10 @@
                 .AddDefaultTokenProviders();
 
             // Add application services.
+            services.AddAutoMapper();
+
+            services.AddDomainServices();
+
             services.AddAuthentication().AddFacebook(facebookOptions =>
             {
                 facebookOptions.AppId = Configuration["Authentication:Facebook:AppId"];

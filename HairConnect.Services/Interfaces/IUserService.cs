@@ -9,6 +9,12 @@
         Task<IEnumerable<User>> GetAllUsers();
 
         Task<User> GetUserById(string id);
+
+        Task ChangeProfilePicture(string id, byte[] newPicture);
+
+        Task UpRating(string id);
+
+        Task DownRating(string id);
     }
 
 }

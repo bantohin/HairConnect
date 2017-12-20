@@ -19,7 +19,7 @@
         {
             <tr>
                 <th>
-                    <img class="img-thumbnail img-responsive img-height" src="@Url.Action("GetProfilePicture", "Profiles", new { pictureContent = profile.ProfilePicture})"/>
+                    <img class="img-thumbnail img-responsive img-height" src="data:image;base64,@System.Convert.ToBase64String(profile.ProfilePicture)" height="80" width="80"/>
                 </th>
                 <th>
                     <span>@profile.FirstName @profile.LastName</span>

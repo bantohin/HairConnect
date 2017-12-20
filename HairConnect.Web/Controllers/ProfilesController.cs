@@ -10,17 +10,20 @@
     using System.Linq;
     using AutoMapper;
     using Models.Profiles;
+    using System;
 
     [Authorize]
     public class ProfilesController : Controller
     {
         private readonly IUserService userService;
         private readonly UserManager<User> userManager;
+        private readonly IPictureService pictureService;
 
-        public ProfilesController(IUserService userService, UserManager<User> userManager)
+        public ProfilesController(IUserService userService, UserManager<User> userManager, IPictureService pictureService)
         {
             this.userService = userService;
             this.userManager = userManager;
+            this.pictureService = pictureService;
         }
 
         public async Task<IActionResult> ListProfiles()
@@ -56,14 +59,23 @@
             return View(profile);
         }
 
-        public FileContentResult GetProfilePicture(byte[] pictureContent)
+        public async Task<IActionResult> Upvote(string id)
         {
-            if (pictureContent != null)
-            {
-                return new FileContentResult(pictureContent, "image/jpeg");
-            }
+            await this.userService.UpRating(id);
 
-            return null;
+            return RedirectToAction("Details", new { id });
+        }
+
+        public async Task<IActionResult> Downvote(string id)
+        {
+            await this.userService.DownRating(id);
+
+            return RedirectToAction("Details", new { id });
+        }
+
+        public string GetPicture(byte[] pictureContent)
+        {
+            return this.pictureService.DisplayPicture(pictureContent);
         }
     }
 }

@@ -42,6 +42,8 @@
 
             services.AddDomainServices();
 
+            services.AddRouting(routing => routing.LowercaseUrls = true);
+
             services.AddAuthentication().AddFacebook(facebookOptions =>
             {
                 facebookOptions.AppId = Configuration["Authentication:Facebook:AppId"];

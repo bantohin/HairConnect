@@ -1,4 +1,6 @@
-﻿@model UserDetailsModel
+﻿@using HairConnect.Web.Controllers
+
+@model UserDetailsModel
 
 @{
     ViewData["Title"] = "Details";
@@ -6,18 +8,26 @@
 
 <div class="text-center">
     <div>
-        <img class="img-thumbnail img-responsive img-height" src="@Url.Action("GetProfilePicture", "Profiles", new { pictureContent = Model.ProfilePicture})" />
+        <img class="img-thumbnail img-responsive img-height" src="data:image;base64,@System.Convert.ToBase64String(Model.ProfilePicture)" height="200" width="200" />
     </div>
     <h3>@Model.FirstName @Model.LastName</h3>
     <br />
-    <h4>@Model.Rating</h4>
-    <br />
-    <ul class="list-group">
-        @foreach (Picture picture in Model.Pictures)
+    <div>
+        <h4>@Model.Rating</h4>
+        @if (this.User.Identity.Name != Model.Email)
         {
-            <li class="list-group-item">
-                <img class="img-thumbnail img-responsive img-height" src="@Url.Action("GetProfilePicture", "Profiles", new { pictureContent = picture})" />
-            </li>
+            <form method="post">
+                <input type="submit" class="btn-success btn-sm " value="+" asp-controller="Profiles" asp-action="Upvote" asp-route-id="@Model.Id" />
+                <input type="submit" class="btn-danger btn-sm" value="-" asp-controller="Profiles" asp-action="Downvote" asp-route-id="@Model.Id" />
+            </form>
         }
-    </ul>
+    </div>
+    <br />
+
+    @if (User.Identity.Name == Model.Email)
+    {
+        <a class="btn btn-lg btn-primary" asp-controller="Pictures" asp-action="AddPicture">Add Picture</a>
+    }
+
+    @await Component.InvokeAsync("ListPictures", new { id = Model.Id})
 </div>

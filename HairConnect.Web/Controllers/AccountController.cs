@@ -10,6 +10,8 @@
     using Microsoft.Extensions.Logging;
     using Data.Models;
     using Models.AccountViewModels;
+    using Services.Interfaces;
+    using System.IO;
 
     [Authorize]
     [Route("[controller]/[action]")]
@@ -18,15 +20,18 @@
         private readonly UserManager<User> _userManager;
         private readonly SignInManager<User> _signInManager;
         private readonly ILogger _logger;
+        private readonly IPictureService pictureService;
 
         public AccountController(
             UserManager<User> userManager,
             SignInManager<User> signInManager,
+            IPictureService pictureService,
         ILogger<AccountController> logger)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _logger = logger;
+            this.pictureService = pictureService;
         }
 
         [TempData]
@@ -218,7 +223,8 @@
                     Email = model.Email,
                     FirstName = model.FirstName,
                     LastName = model.LastName,
-                    PhoneNumber = model.PhoneNumber
+                    PhoneNumber = model.PhoneNumber,
+                    ProfilePicture = this.ConvertAnonymousProfPic()
                 };
                 var result = await _userManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
@@ -241,6 +247,11 @@
 
             // If we got this far, something failed, redisplay form
             return View(model);
+        }
+
+        private byte[] ConvertAnonymousProfPic()
+        {
+            return System.IO.File.ReadAllBytes(WebConstants.AnonProfPicPath);
         }
 
         [HttpPost]

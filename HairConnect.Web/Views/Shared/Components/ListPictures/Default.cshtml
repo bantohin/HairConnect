@@ -2,22 +2,47 @@
 
 @if (Model.Pictures.Count > 0)
 {
-    <div id="myCarousel" class="carousel slide" data-ride="carousel">
+    <br />
+    <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="false">
         <!-- Indicators -->
         <ol class="carousel-indicators">
             @for (int i = 0; i < Model.Pictures.Count; i++)
             {
-                <li data-target="#myCarousel" data-slide-to="@i"></li>
+                if (i == 0)
+                {
+                    <li data-target="#myCarousel" data-slide-to="@i" class="active"></li>
+                }
+                else
+                {
+                    <li data-target="#myCarousel" data-slide-to="@i"></li>
+                }
             }
         </ol>
 
         <!-- Wrapper for slides -->
         <div class="carousel-inner">
-            @foreach (byte[] picture in Model.Pictures)
+            @for (int i = 0; i < Model.Pictures.Count; i++)
             {
-                <div class="item">
-                    <img src="data:image;base64,@System.Convert.ToBase64String(picture)" height="200" width="200" />
-                </div>
+                if (i == 0)
+                {
+                    <div class="item active">
+                        <img src="data:image;base64,@System.Convert.ToBase64String(Model.Pictures[i].Content)" height="500" width="500" class="center-block" />
+                        @if (this.User.IsInRole(WebConstants.AdminRole) || this.User.Identity.Name == Model.Pictures[i].OwnerEmail)
+                        {
+                            <a asp-controller="Pictures" asp-action="DeletePicture" asp-route-id="@Model.Pictures[i].Id" class="btn btn-danger">Delete</a>
+                        }
+                    </div>
+                }
+                else
+                {
+                    <div class="item">
+                        <img src="data:image;base64,@System.Convert.ToBase64String(Model.Pictures[i].Content)" height="500" width="500" class="center-block" />
+                        @if (this.User.IsInRole(WebConstants.AdminRole) || this.User.Identity.Name == Model.Pictures[i].OwnerEmail)
+                        {
+                            <a asp-controller="Pictures" asp-action="DeletePicture" asp-route-id="@Model.Pictures[i].Id" class="btn btn-danger">Delete</a>
+                        }
+                    </div>
+                }
             }
         </div>
 

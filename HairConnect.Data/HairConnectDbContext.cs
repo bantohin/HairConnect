@@ -21,7 +21,7 @@
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
-            // Conversations 
+            //Conversations 
             builder
                 .Entity<Conversation>()
                 .HasOne(c => c.Sender)

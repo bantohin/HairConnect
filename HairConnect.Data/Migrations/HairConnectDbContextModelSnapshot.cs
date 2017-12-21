@@ -273,11 +273,13 @@ namespace HairConnect.Data.Migrations
                 {
                     b.HasOne("HairConnect.Data.Models.User", "Receiver")
                         .WithMany("ConversationsReceived")
-                        .HasForeignKey("ReceiverId");
+                        .HasForeignKey("ReceiverId")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("HairConnect.Data.Models.User", "Sender")
                         .WithMany("ConversationsSent")
-                        .HasForeignKey("SenderId");
+                        .HasForeignKey("SenderId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("HairConnect.Data.Models.Message", b =>
@@ -289,21 +291,24 @@ namespace HairConnect.Data.Migrations
 
                     b.HasOne("HairConnect.Data.Models.User", "Sender")
                         .WithMany("Messages")
-                        .HasForeignKey("SenderId");
+                        .HasForeignKey("SenderId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("HairConnect.Data.Models.Picture", b =>
                 {
                     b.HasOne("HairConnect.Data.Models.User", "User")
                         .WithMany("Pictures")
-                        .HasForeignKey("UserId");
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("HairConnect.Data.Models.Report", b =>
                 {
                     b.HasOne("HairConnect.Data.Models.User", "ReportedUser")
                         .WithMany("ReceivedReports")
-                        .HasForeignKey("ReportedUserId");
+                        .HasForeignKey("ReportedUserId")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("HairConnect.Data.Models.User", "Sender")
                         .WithMany("FiledReports")

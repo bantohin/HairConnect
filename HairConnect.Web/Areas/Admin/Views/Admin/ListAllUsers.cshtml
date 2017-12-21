@@ -1,0 +1,36 @@
+﻿@model List<ListUsersModel>
+
+@{
+    ViewData["Title"] = "ListAllUsers";
+}
+
+<h1 class="text-center">Admin Panel</h1>
+
+<table class="table table-bordered table-responsive table-responsive">
+    <thead>
+        <tr>
+            <th>Email</th>
+            <th>Name</th>
+            <th>Roles</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (ListUsersModel user in Model)
+        {
+            <tr>
+                <td>@user.Email</td>
+                <td>@user.FirstName @user.LastName</td>
+                <td>@string.Join(", ", user.Roles)</td>
+                <td>
+                    @if (!user.Roles.Contains(WebConstants.AdminRole))
+                    {
+                        <a asp-controller="Admin" asp-action="MakeAdmin" asp-route-id="@user.Id" class="btn btn-success">Make Admin</a>
+                        <a asp-controller="Admin" asp-action="Ban" asp-route-id="@user.Id" class="btn btn-danger">Ban</a>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+

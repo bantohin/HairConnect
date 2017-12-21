@@ -8,12 +8,27 @@
 
     public class ListPicturesModel : IMapFrom<User>, IHaveCustomMapping
     {
-        public List<byte[]> Pictures { get; set; }
+        public List<ListPictureInfo> Pictures { get; set; }
 
         public void ConfigureMapping(Profile mapper)
         {
             mapper.CreateMap<User, ListPicturesModel>()
-                .ForMember(u => u.Pictures, cfg => cfg.MapFrom(u => u.Pictures.Select(p => p.Content)));
+                .ForMember(u => u.Pictures, cfg => cfg.MapFrom(u => u.Pictures.Select(p => new ListPictureInfo
+                {
+                    Content = p.Content,
+                    Id = p.Id,
+                    OwnerEmail = p.User.Email
+                })));
+        }
+
+        public class ListPictureInfo
+        {
+
+            public int Id { get; set; }
+
+            public byte[] Content { get; set; }
+
+            public string OwnerEmail { get; set; }
         }
     }
 }

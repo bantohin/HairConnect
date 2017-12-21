@@ -8,6 +8,12 @@
 {
     <form asp-area="" asp-controller="Account" asp-action="Logout" method="post" id="logoutForm" class="navbar-right">
         <ul class="nav navbar-nav navbar-right">
+            @if (User.IsInRole(WebConstants.AdminRole))
+            {
+                <li>
+                    <a asp-area="Admin" asp-controller="Admin" asp-action="ListAllUsers">Admin Panel</a>
+                </li>
+            }
             <li>
                 <div class="dropdown">
                     <button class="btn btn-link navbar-btn navbar-link dropdown-toggle" type="button" data-toggle="dropdown">My Profile</button>

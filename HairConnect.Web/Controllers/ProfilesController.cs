@@ -10,7 +10,7 @@
     using System.Linq;
     using AutoMapper;
     using Models.Profiles;
-    using System;
+    using HairConnect.Web.Infrastructure.Extensions;
 
     [Authorize]
     public class ProfilesController : Controller
@@ -47,11 +47,19 @@
         public async Task<IActionResult> Details(string id)
         {
             User user = await this.userService.GetUserById(id);
+            
+            if (user == null)
+            {
+                this.TempData.AddErrorMessage("No such user exists.");
+                return RedirectToAction("Index", "Home");
+            }
+
             IEnumerable<string> roles = await this.userManager.GetRolesAsync(user);
 
-            if (user == null || !roles.Contains(WebConstants.HairdresserRole))
+            if (!roles.Contains(WebConstants.HairdresserRole))
             {
-                return NotFound();
+                this.TempData.AddErrorMessage("The user is not a hairdresser.");
+                return RedirectToAction("Index", "Home");
             }
 
             UserDetailsModel profile = Mapper.Map<User, UserDetailsModel>(user);

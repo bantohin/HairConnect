@@ -9,6 +9,8 @@
     using System.IO;
     using System.Threading.Tasks;
     using Microsoft.AspNetCore.Identity;
+    using System.Linq;
+    using Microsoft.EntityFrameworkCore;
 
     public class PictureService : IPictureService
     {
@@ -32,8 +34,24 @@
                 };
 
                 await this.db.Pictures.AddAsync(picture);
-                await this.db.SaveChangesAsync();
             }
+
+            await this.db.SaveChangesAsync();
+        }
+
+        public async Task DeleteAllPicturesFromUser(User user)
+        {
+            List<Picture> pictures = await this.db.Pictures.Where(p => p.UserId == user.Id).ToListAsync();
+            this.db.RemoveRange(pictures);
+
+            await this.db.SaveChangesAsync();
+        }
+
+        public async Task DeletePicture(int id)
+        {
+            Picture pic = await this.GetPictureById(id);
+            this.db.Pictures.Remove(pic);
+            await this.db.SaveChangesAsync();
         }
 
         public string DisplayPicture(byte[] picture)
@@ -47,6 +65,28 @@
             }
 
             return null;
+        }
+
+        public async Task<User> GetOwner(int id)
+        {
+            Picture pic = await this.GetPictureById(id);
+
+            return pic.User;
+        }
+
+        public async Task<Picture> GetPictureById(int id)
+        {
+            return await this.db.Pictures.Include(p => p.User).FirstOrDefaultAsync(p => p.Id == id);
+        }
+
+        public bool PictureExists(int id)
+        {
+            if (this.db.Pictures.Any(p => p.Id == id))
+            {
+                return true;
+            }
+
+            return false;
         }
 
         public byte[] PictureToByteArray(IFormFile picture)

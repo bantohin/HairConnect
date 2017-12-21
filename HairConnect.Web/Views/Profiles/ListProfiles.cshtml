@@ -5,7 +5,7 @@
 
 <h2>Hairdressers</h2>
 
-<table class="table-bordered table-responsive table-condensed">
+<table class="table table-bordered table-responsive table-condensed table-bordered">
     <thead>
         <tr>
             <th>Profile Picture</th>
@@ -18,18 +18,18 @@
         @foreach (var profile in Model)
         {
             <tr>
-                <th>
+                <td>
                     <img class="img-thumbnail img-responsive img-height" src="data:image;base64,@System.Convert.ToBase64String(profile.ProfilePicture)" height="80" width="80"/>
-                </th>
-                <th>
+                </td>
+                <td>
                     <span>@profile.FirstName @profile.LastName</span>
-                </th>
-                <th>
+                </td>
+                <td>
                     @profile.Rating
-                </th>
-                <th>
-                    <a class="btn-group-lg" asp-controller="Profiles" asp-action="Details" asp-route-id="@profile.Id">View Profile</a>
-                </th> 
+                </td>
+                <td>
+                    <a class="btn btn-default" asp-controller="Profiles" asp-action="Details" asp-route-id="@profile.Id">View Profile</a>
+                </td> 
             </tr>
         }
     </tbody>

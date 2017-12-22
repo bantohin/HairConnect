@@ -11,15 +11,25 @@
             @if (User.IsInRole(WebConstants.AdminRole))
             {
                 <li>
-                    <a asp-area="Admin" asp-controller="Admin" asp-action="ListAllUsers">Admin Panel</a>
+                    <div class="dropdown">
+                        <button class="btn btn-link navbar-btn navbar-link dropdown-toggle" type="button" data-toggle="dropdown">Admin</button>
+                        <ul class="dropdown-menu">
+                            <li><a class="btn btn-link navbar-link" asp-area="Admin" asp-controller="Admin" asp-action="ListAllUsers">Admin Panel</a></li>
+                            <li><a class="btn btn-link navbar-link" asp-area="Conversations" asp-controller="Reports" asp-action="ListReports">Reports</a></li>
+                        </ul>
+                    </div>
                 </li>
             }
             <li>
                 <div class="dropdown">
-                    <button class="btn btn-link navbar-btn navbar-link dropdown-toggle" type="button" data-toggle="dropdown">My Profile</button>
+                    <button class="btn btn-link navbar-btn navbar-link dropdown-toggle" type="button" data-toggle="dropdown">Hello, @UserManager.FindByEmailAsync(User.Identity.Name).Result.FirstName!</button>
                     <ul class="dropdown-menu">
-                        <li><a class="btn btn-link navbar-btn" asp-area="" asp-controller="Profiles" asp-action="Details" asp-route-id="@UserManager.GetUserId(User)">View Profile</a></li>
-                        <li><a class="btn btn-link navbar-btn" asp-area="" asp-controller="Manage" asp-action="Index">Edit Profile</a></li>
+                        @if (this.User.IsInRole(WebConstants.HairdresserRole))
+                        {
+                            <li><a class="btn btn-link navbar-link" asp-area="" asp-controller="Profiles" asp-action="Details" asp-route-id="@UserManager.GetUserId(User)">View Profile</a></li>
+                        }
+                        <li><a class="btn btn-link navbar-btn navbar-link" asp-area="" asp-controller="Manage" asp-action="Index">Edit Profile</a></li>
+                        <li><a class="btn btn-link navbar-btn navbar-link" asp-area="Conversations" asp-controller="Messages" asp-action="ListConversations" asp-route-id="@UserManager.GetUserId(User)">Messages</a></li>
                     </ul>
                 </div>
             </li>

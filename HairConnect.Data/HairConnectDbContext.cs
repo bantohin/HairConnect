@@ -34,12 +34,6 @@
                 .WithMany(r => r.ConversationsReceived)
                 .HasForeignKey(c => c.ReceiverId);
 
-            builder
-                .Entity<Conversation>()
-                .HasMany(c => c.Messages)
-                .WithOne(m => m.Conversation)
-                .HasForeignKey(m => m.ConversationId);
-
             //Reports
             builder
                 .Entity<Report>()
@@ -65,10 +59,20 @@
                 .HasForeignKey(m => m.SenderId);
 
             builder
-                .Entity<Message>()
-                .HasOne(m => m.Conversation)
+                .Entity<ConversationMessage>()
+                .HasKey(cm => new { cm.ConversationId, cm.MessageId });
+
+            builder
+                .Entity<ConversationMessage>()
+                .HasOne(cm => cm.Message)
+                .WithMany(m => m.Conversations)
+                .HasForeignKey(cm => cm.MessageId);
+
+            builder
+                .Entity<ConversationMessage>()
+                .HasOne(cm => cm.Conversation)
                 .WithMany(c => c.Messages)
-                .HasForeignKey(m => m.ConversationId);
+                .HasForeignKey(cm => cm.ConversationId);
 
             //Pictures
             builder

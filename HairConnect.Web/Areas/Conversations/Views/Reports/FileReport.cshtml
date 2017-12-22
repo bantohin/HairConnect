@@ -1,0 +1,17 @@
+﻿@model FileReportModel
+
+@{
+    ViewData["Title"] = "FileReport";
+}
+
+<h2 class="text-center">File Report</h2>
+<form method="post" asp-area="Conversations" asp-controller="Reports" asp-action="FileReport">
+    <div class="form-group">
+        <input asp-for="ReportedUserId" value="@Model.ReportedUserId" hidden />
+        <label asp-for="Content">Reason:</label>
+        <input asp-for="Content" class="form-control"/>
+        <span asp-validation-for="Content" class="text-danger"></span>
+        <button type="submit" class="btn btn-default">Submit</button>
+    </div>
+</form>
+

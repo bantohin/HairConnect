@@ -12,7 +12,10 @@
     </div>
     <div>
         <h3>@Model.FirstName @Model.LastName</h3>
-        <a class="btn btn-primary" asp-area="Messages" asp-controller="Messages" asp-action="SendMessage">Send Message</a>
+        @if (this.User.Identity.Name != Model.Email)
+        {
+            <a class="btn btn-primary" asp-area="Conversations" asp-controller="Messages" asp-action="ShowConversation" asp-route-receiverId="@Model.Id">Send Message</a>
+        }
     </div>
     <br />
     <h3>@Model.Email</h3>
@@ -40,4 +43,9 @@
     }
 
     @await Component.InvokeAsync("ListPictures", new { id = Model.Id })
+
+    @if (this.User.Identity.Name != Model.Email && !this.User.IsInRole(WebConstants.AdminRole))
+    {
+        <a class="btn btn-default" asp-area="Conversations" asp-controller="Reports" asp-action="FileReport" asp-route-id="@Model.Id">Report</a>
+    }
 </div>

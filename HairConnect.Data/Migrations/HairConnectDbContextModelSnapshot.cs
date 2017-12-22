@@ -38,6 +38,19 @@ namespace HairConnect.Data.Migrations
                     b.ToTable("Conversations");
                 });
 
+            modelBuilder.Entity("HairConnect.Data.Models.ConversationMessage", b =>
+                {
+                    b.Property<int>("ConversationId");
+
+                    b.Property<int>("MessageId");
+
+                    b.HasKey("ConversationId", "MessageId");
+
+                    b.HasIndex("MessageId");
+
+                    b.ToTable("ConversationMessage");
+                });
+
             modelBuilder.Entity("HairConnect.Data.Models.Message", b =>
                 {
                     b.Property<int>("Id")
@@ -47,13 +60,9 @@ namespace HairConnect.Data.Migrations
                         .IsRequired()
                         .HasMaxLength(300);
 
-                    b.Property<int>("ConversationId");
-
                     b.Property<string>("SenderId");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("ConversationId");
 
                     b.HasIndex("SenderId");
 
@@ -273,42 +282,45 @@ namespace HairConnect.Data.Migrations
                 {
                     b.HasOne("HairConnect.Data.Models.User", "Receiver")
                         .WithMany("ConversationsReceived")
-                        .HasForeignKey("ReceiverId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("ReceiverId");
 
                     b.HasOne("HairConnect.Data.Models.User", "Sender")
                         .WithMany("ConversationsSent")
-                        .HasForeignKey("SenderId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("SenderId");
                 });
 
-            modelBuilder.Entity("HairConnect.Data.Models.Message", b =>
+            modelBuilder.Entity("HairConnect.Data.Models.ConversationMessage", b =>
                 {
                     b.HasOne("HairConnect.Data.Models.Conversation", "Conversation")
                         .WithMany("Messages")
                         .HasForeignKey("ConversationId")
                         .OnDelete(DeleteBehavior.Cascade);
 
+                    b.HasOne("HairConnect.Data.Models.Message", "Message")
+                        .WithMany("Conversations")
+                        .HasForeignKey("MessageId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("HairConnect.Data.Models.Message", b =>
+                {
                     b.HasOne("HairConnect.Data.Models.User", "Sender")
                         .WithMany("Messages")
-                        .HasForeignKey("SenderId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("SenderId");
                 });
 
             modelBuilder.Entity("HairConnect.Data.Models.Picture", b =>
                 {
                     b.HasOne("HairConnect.Data.Models.User", "User")
                         .WithMany("Pictures")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("UserId");
                 });
 
             modelBuilder.Entity("HairConnect.Data.Models.Report", b =>
                 {
                     b.HasOne("HairConnect.Data.Models.User", "ReportedUser")
                         .WithMany("ReceivedReports")
-                        .HasForeignKey("ReportedUserId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("ReportedUserId");
 
                     b.HasOne("HairConnect.Data.Models.User", "Sender")
                         .WithMany("FiledReports")

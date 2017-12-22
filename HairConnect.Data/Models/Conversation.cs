@@ -14,6 +14,6 @@
 
         public User Receiver { get; set; }
 
-        public List<Message> Messages { get; set; } = new List<Message>();
+        public List<ConversationMessage> Messages { get; set; } = new List<ConversationMessage>();
     }
 }

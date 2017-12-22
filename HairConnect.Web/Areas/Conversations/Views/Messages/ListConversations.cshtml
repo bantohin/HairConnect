@@ -1,0 +1,31 @@
+﻿@model List<ListConversationModel>
+
+@{
+    ViewData["Title"] = "ListConversations";
+}
+
+@if (Model.Count > 0)
+{
+    <h2 class="text-center">Conversations</h2>
+    <table class="table table-bordered table-condensed table-responsive">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (ListConversationModel chat in Model)
+            {
+                <tr>
+                    <td>@chat.Receiver.FirstName @chat.Receiver.LastName</td>
+                    <td><a class="btn btn-default" asp-area="Conversations" asp-controller="Messages" asp-action="ShowConversation" asp-route-receiverId="@chat.Receiver.Id">View Conversation</a></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <h1>No conversations yet. Start one with any of our <a asp-area="" asp-controller="Profiles" asp-action="ListProfiles">hairdressers.</a></h1>
+}

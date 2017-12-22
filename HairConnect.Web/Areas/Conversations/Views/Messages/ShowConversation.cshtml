@@ -1,0 +1,29 @@
+﻿@model ShowConversationModel
+
+@{
+    ViewData["Title"] = "ShowConversation";
+}
+
+<h2 class="text-center">@Model.Receiver.FirstName @Model.Receiver.LastName <a asp-area="Conversations" asp-controller="Messages" asp-action="DeleteMessages" asp-route-receiverId="@Model.Receiver.Id" class="btn btn-danger">Delete</a></h2>
+<div class="pre-scrollable">
+    @foreach (ShowMessagesModel message in Model.Messages)
+    {
+        if (message.SenderId == Model.Sender.Id)
+        {
+            <div class="jumbotron text-right" style="background-color: gray">
+                @message.Content
+            </div>
+        }
+        else
+        {
+            <div class="jumbotron" style="background-color: dodgerblue">
+                @message.Content
+            </div>
+        }
+    }
+    @await Component.InvokeAsync("SendMessage", new { receiverId = Model.Receiver.Id})
+</div>
+
+@section Scripts {
+    @await Html.PartialAsync("_ValidationScriptsPartial"))
+}

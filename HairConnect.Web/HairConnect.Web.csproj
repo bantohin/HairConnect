@@ -25,11 +25,4 @@
     <ProjectReference Include="..\HairConnect.Services\HairConnect.Services.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Areas\Conversations\Controllers\" />
-    <Folder Include="Areas\Conversations\Data\" />
-    <Folder Include="Areas\Conversations\Models\" />
-    <Folder Include="Areas\Conversations\Views\" />
-  </ItemGroup>
-
 </Project>

@@ -1,0 +1,28 @@
+﻿@model IEnumerable<ListReportsModel>
+
+@{
+    ViewData["Title"] = "ListReports";
+}
+
+<h2 class="text-center">Reports</h2>
+
+<table class="table table-bordered table-condensed table-responsive">
+    <thead>
+        <tr>
+            <th>Sender</th>
+            <th>Reported User</th>
+            <th>Reason</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (ListReportsModel report in Model)
+        {
+            <tr>
+                <td>@report.Sender.FirstName @report.Sender.LastName (@report.Sender.Email)</td>
+                <td>@report.ReportedUser.FirstName @report.ReportedUser.LastName (@report.ReportedUser.Email)</td>
+                <td>@report.Content</td>
+            </tr>
+        }
+    </tbody>
+</table>
+

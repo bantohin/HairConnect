@@ -1,11 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
+﻿
 namespace HairConnect.Web.Areas.Conversations.Controllers
 {
-    public class BaseController
+    using Microsoft.AspNetCore.Authorization;
+    using Microsoft.AspNetCore.Mvc;
+
+    [Area("Conversations")]
+    [Authorize]
+    public class BaseController : Controller
     {
     }
 }

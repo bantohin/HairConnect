@@ -16,12 +16,20 @@
     {
         private readonly IUserService userService;
         private readonly IPictureService pictureService;
+        private readonly IReportService reportService;
+        private readonly IMessageService messageService;
         private readonly UserManager<User> userManager;
 
-        public AdminController(IUserService userService, IPictureService pictureService, UserManager<User> userManager)
+        public AdminController(IUserService userService,
+            IPictureService pictureService,
+            IReportService reportService,
+            IMessageService messageService,
+            UserManager<User> userManager)
         {
             this.userService = userService;
             this.pictureService = pictureService;
+            this.reportService = reportService;
+            this.messageService = messageService;
             this.userManager = userManager;
         }
 
@@ -74,6 +82,8 @@
 
             string email = user.Email;
             await this.pictureService.DeleteAllPicturesFromUser(user);
+            await this.messageService.DeleteAllMessagesAndConvosFromUser(user);
+            await this.reportService.DeleteAllReportsFromUser(user);
             await this.userManager.DeleteAsync(user);
             this.TempData.AddSuccessMessage($"User({email}) successfully deleted.");
 

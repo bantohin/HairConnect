@@ -1,5 +1,6 @@
 ﻿namespace HairConnect.Data.Models
 {
+    using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
 
     public class Message
@@ -14,8 +15,6 @@
 
         public User Sender { get; set; }
 
-        public int ConversationId { get; set; }
-
-        public Conversation Conversation { get; set; }
+        public List<ConversationMessage> Conversations { get; set; } = new List<ConversationMessage>();
     }
 }

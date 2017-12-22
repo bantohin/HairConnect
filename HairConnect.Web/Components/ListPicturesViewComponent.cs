@@ -6,6 +6,7 @@
     using System.Threading.Tasks;
     using AutoMapper;
     using Services.Interfaces;
+    using System.Collections.Generic;
 
     [ViewComponent]
     public class ListPicturesViewComponent : ViewComponent
@@ -19,8 +20,8 @@
 
         public async Task<IViewComponentResult> InvokeAsync(string id)
         {
-            User user = await this.userService.GetUserById(id);
-            ListPicturesModel model = Mapper.Map<ListPicturesModel>(user);
+            List<Picture> pictures = this.userService.GetUserById(id).Result.Pictures;
+            List<ListPicturesModel> model = Mapper.Map<List<ListPicturesModel>>(pictures);
 
             return View(model);
         }

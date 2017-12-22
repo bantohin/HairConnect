@@ -11,6 +11,7 @@
     using AutoMapper;
     using Models.Profiles;
     using HairConnect.Web.Infrastructure.Extensions;
+    using Microsoft.Extensions.Caching.Memory;
 
     [Authorize]
     public class ProfilesController : Controller
@@ -18,12 +19,14 @@
         private readonly IUserService userService;
         private readonly UserManager<User> userManager;
         private readonly IPictureService pictureService;
+        private readonly IMemoryCache memoryCache;
 
-        public ProfilesController(IUserService userService, UserManager<User> userManager, IPictureService pictureService)
+        public ProfilesController(IUserService userService, UserManager<User> userManager, IPictureService pictureService, IMemoryCache memoryCache)
         {
             this.userService = userService;
             this.userManager = userManager;
             this.pictureService = pictureService;
+            this.memoryCache = memoryCache;
         }
 
         public async Task<IActionResult> ListProfiles()

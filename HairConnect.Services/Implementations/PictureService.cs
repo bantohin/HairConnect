@@ -11,6 +11,8 @@
     using Microsoft.AspNetCore.Identity;
     using System.Linq;
     using Microsoft.EntityFrameworkCore;
+    using Models.Pictures;
+    using AutoMapper;
 
     public class PictureService : IPictureService
     {
@@ -77,6 +79,12 @@
         public async Task<Picture> GetPictureById(int id)
         {
             return await this.db.Pictures.Include(p => p.User).FirstOrDefaultAsync(p => p.Id == id);
+        }
+
+        public async Task<DeletePictureModel> GetPictureToDelete(int id)
+        {
+            Picture pic = await this.GetPictureById(id);
+            return Mapper.Map<DeletePictureModel>(pic);
         }
 
         public bool PictureExists(int id)

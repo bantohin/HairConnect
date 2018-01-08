@@ -1,4 +1,4 @@
-﻿namespace HairConnect.Web.Models.Pictures
+﻿namespace HairConnect.Services.Models.Pictures
 {
     using Common.Mapping;
     using Data.Models;

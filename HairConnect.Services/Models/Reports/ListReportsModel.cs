@@ -1,14 +1,14 @@
-﻿namespace HairConnect.Web.Areas.Conversations.Models.Reports
+﻿namespace HairConnect.Services.Models.Reports
 {
-    using Common.Mapping;
     using Data.Models;
+    using Common.Mapping;
 
     public class ListReportsModel : IMapFrom<Report>
     {
-        public string Content { get; set; }
-
         public User Sender { get; set; }
 
         public User ReportedUser { get; set; }
+
+        public string Content { get; set; }
     }
 }

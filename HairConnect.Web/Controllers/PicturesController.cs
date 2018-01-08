@@ -4,11 +4,11 @@
     using Microsoft.AspNetCore.Mvc;
     using System.Threading.Tasks;
     using Data.Models;
-    using Models.Pictures;
-    using AutoMapper;
+    using Services.Models.Pictures;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Identity;
-    using HairConnect.Web.Infrastructure.Extensions;
+    using Infrastructure.Extensions;
+    using Models.Pictures;
 
     [Authorize]
     public class PicturesController : Controller
@@ -60,7 +60,7 @@
                 return RedirectToAction("Index", "Home");
             }
 
-            DeletePictureModel model = Mapper.Map<DeletePictureModel>(await this.pictureService.GetPictureById(id));
+            DeletePictureModel model = await this.pictureService.GetPictureToDelete(id);
 
             return View(model);
         }

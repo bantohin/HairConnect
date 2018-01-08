@@ -7,6 +7,9 @@
     using Data.Models;
     using Microsoft.EntityFrameworkCore;
     using System.Collections.Generic;
+    using Models.Messages;
+    using AutoMapper;
+    using AutoMapper.QueryableExtensions;
 
     public class MessageService : IMessageService
     {
@@ -95,13 +98,19 @@
             return conversation;
         }
 
-        public async Task<IEnumerable<Conversation>> GetConversationsForUser(string id)
+        public async Task<IEnumerable<ListConversationModel>> GetConversationsForUser(string id)
         {
             return await this.db
                 .Conversations
                 .Where(c => c.SenderId == id)
                 .Include(c => c.Receiver)
+                .ProjectTo<ListConversationModel>()
                 .ToListAsync();
+        }
+
+        public ShowConversationModel GetConversationToShow(Conversation conversation)
+        {
+            return Mapper.Map<ShowConversationModel>(conversation);
         }
     }
 }

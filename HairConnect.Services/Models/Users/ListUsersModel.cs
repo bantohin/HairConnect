@@ -1,9 +1,7 @@
-﻿namespace HairConnect.Web.Areas.Admin.Models
+﻿namespace HairConnect.Services.Models.Users
 {
-    using AutoMapper;
     using HairConnect.Common.Mapping;
     using HairConnect.Data.Models;
-    using Microsoft.AspNetCore.Identity;
     using System.Collections.Generic;
 
     public class ListUsersModel : IMapFrom<User>

@@ -1,6 +1,7 @@
 ﻿namespace HairConnect.Services.Interfaces
 {
     using Data.Models;
+    using Models.Reports;
     using System.Collections.Generic;
     using System.Threading.Tasks;
 
@@ -8,7 +9,7 @@
     {
         Task CreateReport(string senderId, string reportedId, string content);
 
-        Task<IEnumerable<Report>> GetAllReports();
+        Task<IEnumerable<ListReportsModel>> GetAllReports();
 
         Task DeleteAllReportsFromUser(User user);
     }

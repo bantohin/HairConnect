@@ -7,6 +7,8 @@
     using System.Collections.Generic;
     using Microsoft.EntityFrameworkCore;
     using System.Linq;
+    using Models.Reports;
+    using AutoMapper.QueryableExtensions;
 
     public class ReportService : IReportService
     {
@@ -39,12 +41,13 @@
             await this.db.SaveChangesAsync();
         }
 
-        public async Task<IEnumerable<Report>> GetAllReports()
+        public async Task<IEnumerable<ListReportsModel>> GetAllReports()
         {
-            IEnumerable<Report> reports = await this.db
+            IEnumerable<ListReportsModel> reports = await this.db
                 .Reports
                 .Include(r => r.Sender)
                 .Include(r => r.ReportedUser)
+                .ProjectTo<ListReportsModel>()
                 .ToListAsync();
 
             return reports;

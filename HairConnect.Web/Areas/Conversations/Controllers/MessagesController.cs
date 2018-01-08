@@ -5,11 +5,11 @@
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
     using System.Threading.Tasks;
-    using Models;
-    using AutoMapper;
     using Infrastructure.Extensions;
     using System.Collections.Generic;
     using System.Linq;
+    using Services.Models.Messages;
+    using Models.Messages;
 
     public class MessagesController : BaseController
     {
@@ -36,11 +36,10 @@
             {
                 await this.messageService.CreateConversation(currentUser.Id, receiverId);
             }
-
+            
             Conversation conversation = await this.messageService.GetConversation(currentUser.Id, receiverId);
-            ShowConversationModel model = Mapper.Map<Conversation, ShowConversationModel>(conversation);
 
-            return View(model);
+            return View(this.messageService.GetConversationToShow(conversation));
         }
 
         [HttpPost]
@@ -92,10 +91,9 @@
                 return RedirectToAction("Index", "Home", new { area = "" });
             }
 
-            List<Conversation> conversations = this.messageService.GetConversationsForUser(id).Result.ToList();
-            List<ListConversationModel> model = Mapper.Map<List<ListConversationModel>>(conversations);
+            List<ListConversationModel> conversations = this.messageService.GetConversationsForUser(id).Result.ToList();
 
-            return View(model);
+            return View(conversations);
         }
     }
 }

@@ -1,7 +1,6 @@
 ﻿namespace HairConnect.Web.Areas.Conversations.Controllers
 {
     using Data.Models;
-    using Models.Reports;
     using Infrastructure.Extensions;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
@@ -10,6 +9,8 @@
     using Microsoft.AspNetCore.Authorization;
     using System.Collections.Generic;
     using AutoMapper;
+    using Models.Reports;
+    using Services.Models.Reports;
 
     public class ReportsController : BaseController
     {
@@ -58,9 +59,7 @@
         [Authorize(Roles = WebConstants.AdminRole)]
         public async Task<IActionResult> ListReports()
         {
-            IEnumerable<ListReportsModel> model = Mapper.Map<IEnumerable<ListReportsModel>>(this.reportService.GetAllReports().Result);
-
-            return View(model);
+            return View(await this.reportService.GetAllReports());
         }
     }
 }

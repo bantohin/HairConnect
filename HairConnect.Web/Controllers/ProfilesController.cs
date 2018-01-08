@@ -8,8 +8,6 @@
     using Microsoft.AspNetCore.Identity;
     using Data.Models;
     using System.Linq;
-    using AutoMapper;
-    using Models.Profiles;
     using HairConnect.Web.Infrastructure.Extensions;
     using Microsoft.Extensions.Caching.Memory;
 
@@ -31,20 +29,7 @@
 
         public async Task<IActionResult> ListProfiles()
         {
-            List<User> users = new List<User>();
-
-            foreach (User profile in await this.userService.GetAllUsers())
-            {
-                IEnumerable<string> roles = await this.userManager.GetRolesAsync(profile);
-                if (roles.Contains(WebConstants.HairdresserRole))
-                {
-                    users.Add(profile);
-                }
-            }
-
-            IEnumerable<UserListingModel> profiles = users.Select(Mapper.Map<User, UserListingModel>);
-
-            return View(profiles);
+            return View(await this.userService.GetUsersToList());
         }
 
         public async Task<IActionResult> Details(string id)
@@ -65,9 +50,7 @@
                 return RedirectToAction("Index", "Home");
             }
 
-            UserDetailsModel profile = Mapper.Map<User, UserDetailsModel>(user);
-
-            return View(profile);
+            return View(this.userService.GetUserDetails(user));
         }
 
         public async Task<IActionResult> Upvote(string id)

@@ -1,7 +1,6 @@
-﻿
-namespace HairConnect.Web.Areas.Conversations.Components
+﻿namespace HairConnect.Web.Areas.Conversations.Components
 {
-    using Models;
+    using Models.Messages;
     using Microsoft.AspNetCore.Mvc;
     using System.Threading.Tasks;
 

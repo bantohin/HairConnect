@@ -1,4 +1,4 @@
-﻿namespace HairConnect.Web.Areas.Conversations.Models
+﻿namespace HairConnect.Services.Models.Messages
 {
     using AutoMapper;
     using Common.Mapping;

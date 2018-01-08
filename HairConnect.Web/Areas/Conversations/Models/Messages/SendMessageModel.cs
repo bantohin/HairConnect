@@ -1,13 +1,11 @@
-﻿namespace HairConnect.Web.Areas.Conversations.Models
+﻿namespace HairConnect.Web.Areas.Conversations.Models.Messages
 {
-    using System.ComponentModel.DataAnnotations;
-
     public class SendMessageModel
     {
-        [Required]
-        [MinLength(1)]
-        public string Content { get; set; }
-
         public string ReceiverId { get; set; }
+
+        public string SenderId { get; set; }
+
+        public string Content { get; set; }
     }
 }

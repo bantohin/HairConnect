@@ -1,6 +1,7 @@
 ﻿namespace HairConnect.Services.Interfaces
 {
     using Data.Models;
+    using Models.Users;
     using System.Collections.Generic;
     using System.Threading.Tasks;
 
@@ -15,6 +16,12 @@
         Task UpRating(string id);
 
         Task DownRating(string id);
+
+        Task<IEnumerable<UserListingModel>> GetUsersToList();
+
+        UserDetailsModel GetUserDetails(User user);
+
+        Task<IEnumerable<ListUsersModel>> GetUsersToListAdmin();
     }
 
 }

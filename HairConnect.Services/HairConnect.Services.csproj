@@ -9,8 +9,4 @@
     <ProjectReference Include="..\HairConnect.Data\HairConnect.Data.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Models\" />
-  </ItemGroup>
-
 </Project>

@@ -1,4 +1,4 @@
-﻿namespace HairConnect.Web.Models.Profiles
+﻿namespace HairConnect.Services.Models.Users
 {
     using Common.Mapping;
     using Data.Models;

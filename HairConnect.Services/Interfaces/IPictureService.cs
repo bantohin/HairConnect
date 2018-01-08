@@ -1,6 +1,7 @@
 ﻿namespace HairConnect.Services.Interfaces
 {
     using Data.Models;
+    using Models.Pictures;
     using Microsoft.AspNetCore.Http;
     using System.Collections.Generic;
     using System.Threading.Tasks;
@@ -18,6 +19,8 @@
         Task<User> GetOwner(int id);
 
         Task<Picture> GetPictureById(int id);
+
+        Task<DeletePictureModel> GetPictureToDelete(int id);
 
         Task DeletePicture(int id);
 

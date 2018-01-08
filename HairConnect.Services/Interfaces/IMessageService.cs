@@ -1,6 +1,7 @@
 ﻿namespace HairConnect.Services.Interfaces
 {
     using Data.Models;
+    using Models.Messages;
     using System.Collections.Generic;
     using System.Threading.Tasks;
 
@@ -12,11 +13,13 @@
 
         Task<Conversation> GetConversation(string senderId, string receiverId);
 
+        ShowConversationModel GetConversationToShow(Conversation conversation);
+
         Task CreateMessage(string senderId, string receiverId, string content);
 
         Task DeleteMessages(Conversation conversation);
 
-        Task<IEnumerable<Conversation>> GetConversationsForUser(string id);
+        Task<IEnumerable<ListConversationModel>> GetConversationsForUser(string id);
 
         Task DeleteAllMessagesAndConvosFromUser(User user);
     }

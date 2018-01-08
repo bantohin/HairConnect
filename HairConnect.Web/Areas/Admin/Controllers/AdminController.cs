@@ -35,13 +35,7 @@
 
         public async Task<IActionResult> ListAllUsers()
         {
-            List<ListUsersModel> users = Mapper.Map<List<ListUsersModel>>(await this.userService.GetAllUsers());
-            foreach (ListUsersModel user in users)
-            {
-                user.Roles = this.userManager.GetRolesAsync(await this.userManager.FindByIdAsync(user.Id)).Result.ToList();
-            }
-
-            return View(users);
+            return View(await this.userService.GetUsersToListAdmin());
         }
 
         public async Task<IActionResult> MakeAdmin(string id)
